@@ -1,17 +1,33 @@
 nautilus-scripts
 ================
 
-nautilus scripts compilation
+Nautilus scripts compilation from kinoraw project.
+
+To install and use this scripts you have to copy the files inside a folder and give them execution rights.
+
+on ubuntu 13.x, copy on folder:
+~/.local/share/nautilus/scripts
+
+on ubuntu 12.x or earlier, copy on folder:
+
+~/.gnome2/nautilus-scripts
+
+
+scripts description:
+=====
+
 
 * pyrenamer_here
 
-only works on files, not on folders :(
+Open pyrenamer on current location. It only works on files, not on folders :(
+You must install pyrenamer in order to use this (sudo apt-get install pyrenamer)
 
 
+ffmpeg
+-------
 
-sequence_folder_operations
--------------
+* sequence_folder_operations
 
-*    some scripts to run on folder containing sequences (filenames must be only digits)
+** some scripts to run on folder containing sequences (filenames must be only digits)
 
     
