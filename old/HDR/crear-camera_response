@@ -1,0 +1,7 @@
+#!/bin/bash
+
+jpeg2hdrgen $1 $2 $3 > zsample.hdrgen
+
+pfsinhdrgen zsample.hdrgen | pfshdrcalibrate -v -s zcamera.response
+
+

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	ext=${file##*.}
+	if [ "$ext" == "hdrgen" ]; then
+	    pfsinhdrgen $file | pfshdrcalibrate -v -f zcamera.response | pfsoutexr --fix-halfmax "$base".exr
+	fi
+  fi
+done
+

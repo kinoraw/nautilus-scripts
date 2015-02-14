@@ -1,0 +1,13 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	ext=${file##*.}
+	basename=${base##*/}
+	mkdir $basename 
+	movie2dng --dng --shift 1 $file $basename/$basename_s1
+  fi
+done

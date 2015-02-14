@@ -1,0 +1,7 @@
+#!/bin/bash
+
+dcraw -e $1
+
+rename *.thumb.jpg *.jpg
+
+

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for ((i=0; i<$#/3;i++)); do 
+
+	base1=${1%.*}
+    base2=${2%.*}
+	base3=${3%.*}
+	align_image_stack -a stack $1 $2 $3
+	convert stack0000.tif "$base1"-al.jpg
+	convert stack0001.tif "$base2"-al.jpg
+	convert stack0002.tif "$base3"-al.jpg
+
+	exiftool -tagsFromFile $1 "$base1"-al.jpg
+	exiftool -tagsFromFile $2 "$base2"-al.jpg
+	exiftool -tagsFromFile $3 "$base3"-al.jpg
+
+	rm "$base1"-al.jpg_original
+	rm "$base2"-al.jpg_original
+	rm "$base3"-al.jpg_original
+	rm stack0000.tif
+	rm stack0001.tif
+	rm stack0002.tif
+	
+	jpeg2hdrgen "$base1"-al.jpg "$base2"-al.jpg "$base3"-al.jpg > "$base1"-al.hdrgen
+
+	pfsinhdrgen "$base1"-al.hdrgen | pfshdrcalibrate -v -f /home/carlos/zcamera.response | pfsoutexr "$base1"-al.exr
+
+	pfsin "$base1"-al.exr | pfstmo_mantiuk06 -f 0.1 -s 0.8 | pfsgamma --gamma 3.5 | pfsout "$base1"-mantiuk06.png
+
+	pfsin "$base1"-al.exr | pfstmo_fattal02 | pfsgamma --gamma 2.6 | pfsout "$base1"-fattal.png
+
+	shift 3
+done

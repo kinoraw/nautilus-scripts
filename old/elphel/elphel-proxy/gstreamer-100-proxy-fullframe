@@ -1,0 +1,12 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	ext=${file##*.}
+	basename=${base##*/}
+	gst-launch-0.10 filesrc location=$file ! decodebin ! ffmpegcolorspace ! queue ! jp462bayer ! "video/x-raw-bayer, width=(int)2592, height=(int)1936, format=(string)grbg" ! queue ! bayer2rgb2 method=1 ! queue ! ffmpegcolorspace ! videoscale ! video/x-raw-yuv, width=2592, height = 1936 ! jpegenc ! matroskamux ! filesink location=$base-100.mkv 
+  fi
+done

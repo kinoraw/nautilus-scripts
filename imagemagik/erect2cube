@@ -1,0 +1,26 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+        base=${file%.*}
+        erect2cubic --erect=$file --ptofile=$base.pto
+        nona -o $base-c- $base.pto
+        convert $base-c-0000.tif -resize 2000x2000 -quality 75 $base-f.jpg
+        convert $base-c-0001.tif -resize 2000x2000 -quality 75 $base-r.jpg
+        convert $base-c-0002.tif -resize 2000x2000 -quality 75 $base-b.jpg
+        convert $base-c-0003.tif -resize 2000x2000 -quality 75 $base-l.jpg
+        convert $base-c-0004.tif -resize 2000x2000 -quality 75 $base-u.jpg
+        convert $base-c-0005.tif -resize 2000x2000 -quality 75 $base-d.jpg
+        rm $base-c-0000.tif
+        rm $base-c-0001.tif 
+        rm $base-c-0002.tif
+        rm $base-c-0003.tif
+        rm $base-c-0004.tif
+        rm $base-c-0005.tif
+        rm $base.pto
+  fi
+done
+

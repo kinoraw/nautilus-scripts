@@ -1,0 +1,2 @@
+#!/bin/bash
+vlc rtsp://192.168.1.9:554 -V x11 --rtsp-caching=50 

@@ -1,0 +1,1 @@
+for i in *.jpg; do convert -auto-orient "$i" -resize 50% "$i"; done

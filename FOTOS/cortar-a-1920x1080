@@ -1,0 +1,14 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	    convert -verbose -crop 1920x1088+0-8 $file $file-c
+	    rm $file
+	    mv $file-c $file
+  fi
+done
+
+

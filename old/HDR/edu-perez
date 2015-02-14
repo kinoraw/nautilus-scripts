@@ -1,0 +1,17 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	ext=${file##*.}
+	if [ "$ext" == "exr" ]; then
+	pfsin $file | pfstmo_mantiuk06 -e 1 -s 1 | pfsgamma --gamma 2.2 | pfsout "$base"_mantiuk06.tif
+	pfsin $file | pfstmo_fattal02 -s 1 | pfsout "$base"_fattal02.tif
+
+	fi
+  fi
+done
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+gst-launch-0.10 filesrc location=$1 ! decodebin ! ffmpegcolorspace ! queue ! jp462bayer ! "video/x-raw-bayer, width=(int)1920, height=(int)1088, format=(string)grbg" ! queue ! bayer2rgb2 method=1 ! queue ! ffmpegcolorspace ! xvimagesink
+

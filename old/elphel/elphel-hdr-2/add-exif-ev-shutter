@@ -1,0 +1,12 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	exiftool -ISO=100 -FocalLength=4.5 -ExposureTime=0.04 -ApertureValue=2.0 -overwrite_original $file	
+  fi
+done
+
+

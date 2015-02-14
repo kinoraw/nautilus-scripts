@@ -1,0 +1,28 @@
+<!DOCTYPE FilterScript>
+<FilterScript>
+ <filter name="Compute normals for point sets">
+  <Param tooltip="The number of neighbors used to estimate normals." description="Neighbour num" type="RichInt" value="10" name="K"/>
+  <Param tooltip="The number of smoothing iteration done on the p used to estimate and propagate normals." description="Smooth Iteration" type="RichInt" value="0" name="smoothIter"/>
+  <Param tooltip="If the 'viewpoint' (i.e. scanner position) is known, it can be used to disambiguate normals orientation, so that all the normals will be oriented in the same direction." description="Flip normals w.r.t. viewpoint" type="RichBool" value="true" name="flipFlag"/>
+  <Param x="0" y="0" z="0" tooltip="The viewpoint position can be set by hand (i.e. getting the current viewpoint) or it can be retrieved from mesh camera, if the viewpoint position is stored there." description="Viewpoint Pos." type="RichPoint3f" name="viewPos"/>
+ </filter>
+ <filter name="Marching Cubes (APSS)">
+  <Param tooltip="Scale of the spatial low pass filter.&#xa;It is relative to the radius (local point spacing) of the vertices." description="MLS - Filter scale" type="RichFloat" value="3" name="FilterScale"/>
+  <Param tooltip="Threshold value used to stop the projections.&#xa;This value is scaled by the mean point spacing to get the actual threshold." description="Projection - Accuracy (adv)" type="RichFloat" value="0.0001" name="ProjectionAccuracy"/>
+  <Param tooltip="Max number of iterations for the projection." description="Projection - Max iterations (adv)" type="RichInt" value="15" name="MaxProjectionIters"/>
+  <Param tooltip="Control the curvature of the fitted spheres: 0 is equivalent to a pure plane fit,1 to a pure spherical fit, values between 0 and 1 gives intermediate results,while others real values might give interresting results, but take care with extremesettings !" description="MLS - Spherical parameter" type="RichFloat" value="1" name="SphericalParameter"/>
+  <Param tooltip="If checked, use the accurate MLS gradient instead of the local approximationto compute the normals." description="Accurate normals" type="RichBool" value="true" name="AccurateNormal"/>
+  <Param tooltip="The resolution of the grid on which we run the marching cubes.This marching cube is memory friendly, so you can safely set large values up to 1000 or even more." description="Grid Resolution" type="RichInt" value="200" name="Resolution"/>
+ </filter>
+ <filter name="Vertex Attribute Transfer">
+  <Param tooltip="The mesh that contains the source data that we want to transfer." description="Source Mesh" type="RichMesh" value="0" name="SourceMesh"/>
+  <Param tooltip="The mesh whose vertexes will receive the data from the source." description="Target Mesh" type="RichMesh" value="1" name="TargetMesh"/>
+  <Param tooltip="if enabled, the position of each vertex of the target mesh will be snapped onto the corresponding closest point on the source mesh" description="Transfer Geometry" type="RichBool" value="false" name="GeomTransfer"/>
+  <Param tooltip="if enabled, the normal of each vertex of the target mesh will get the (interpolated) normal of the corresponding closest point on the source mesh" description="Transfer Normal" type="RichBool" value="false" name="NormalTransfer"/>
+  <Param tooltip="if enabled, the color of each vertex of the target mesh will become the color of the corresponding closest point on the source mesh" description="Transfer Color" type="RichBool" value="true" name="ColorTransfer"/>
+  <Param tooltip="if enabled, the quality of each vertex of the target mesh will become the quality of the corresponding closest point on the source mesh" description="Transfer quality" type="RichBool" value="false" name="QualityTransfer"/>
+  <Param tooltip="if enabled,  each vertex of the target mesh will be selected if the corresponding closest point on the source mesh falls in a selected face" description="Transfer Selection" type="RichBool" value="false" name="SelectionTransfer"/>
+  <Param tooltip="if enabled, we store the distance of the transferred value as in the vertex quality" description="Store dist. as quality" type="RichBool" value="false" name="QualityDistance"/>
+  <Param tooltip="Sample points for which we do not find anything whithin this distance are rejected and not considered for recovering attributes." description="Max Dist Search" type="RichAbsPerc" value="50.516" min="0" name="UpperBound" max="2525.82"/>
+ </filter>
+</FilterScript>

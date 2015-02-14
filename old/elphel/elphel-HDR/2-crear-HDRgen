@@ -1,0 +1,8 @@
+#!/bin/bash
+
+jpeg2hdrgen *.jpg > $1.hdrgen
+
+
+
+
+

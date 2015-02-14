@@ -1,0 +1,12 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+        base=${file%.*}
+	    convert -resize 25% $file $base-25s.tif
+  fi
+done
+

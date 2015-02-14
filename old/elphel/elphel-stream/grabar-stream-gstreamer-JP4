@@ -1,0 +1,2 @@
+#!/bin/bash
+gst-launch-0.10 -e rtspsrc location=rtsp://192.168.0.9:554 latency=100 ! rtpjpegdepay  ! tee name=tee1 tee1. ! queue ! matroskamux ! filesink  location=jp46test.mkv tee1. ! queue ! jpegdec ! videoscale ! video/x-raw-yuv,width=384,height=218 ! queue ! jp462bayer ! queue ! bayer2rgb2 ! ffmpegcolorspace ! autovideosink

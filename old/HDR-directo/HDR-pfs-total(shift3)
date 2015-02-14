@@ -1,0 +1,12 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for ((i=0; i<$#/3;i++)); do 
+    base1=${1%.*}
+	dcraw2hdrgen $1 $2 $3 > "$base1".hdrgen
+	pfsinhdrgen "$base1".hdrgen | pfsoutexr "$base1".exr
+	#pfsin "$base1".exr | pfstmo_mantiuk06 -f 0.1 -s 0.8 | pfsgamma --gamma 3.5 | pfsout "$base1"-mantiuk06.png
+	#pfsin "$base1".exr | pfstmo_fattal02 | pfsgamma --gamma 2.6 | pfsout "$base1"-fattal.png
+	shift 3
+done

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	filename=${file%.*}
+	ext=${file##*.}
+	mkdir $filename
+    movie2dng --dng $file $filename/$filename
+  fi
+done
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+mkdir dng
+mv *.dng dng/
+
+mkdir jp4
+mv *.jp4 jp4/
+
+#mkdir jpg
+#mv *.jpg jpg/
+
+mkdir fattal
+mkdir mantiuk
+
+
+
+

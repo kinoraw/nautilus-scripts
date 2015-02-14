@@ -1,0 +1,2 @@
+#!/bin/bash
+gst-launch-0.10 rtspsrc location=rtsp://192.168.1.9:554 latency=100 ! rtpjpegdepay ! jpegdec ! autovideosink

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+
+for ((i=0; i<1833;i++)); do
+        base=$1{file%.*}                 
+	jpeg2hdrgen $1 $2 $3 > $base.hdrgen
+	shift 3
+done

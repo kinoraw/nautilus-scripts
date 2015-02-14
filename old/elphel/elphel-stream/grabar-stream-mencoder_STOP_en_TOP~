@@ -1,0 +1,2 @@
+#!/bin/bash
+mencoder rtsp://192.168.0.9:554 -ovc copy -fps 25 -o ~/Escritorio/rec_mencoder.mov

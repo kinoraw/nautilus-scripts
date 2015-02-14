@@ -1,0 +1,15 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	mkdir xml
+    mv *.xml xml/
+    mkdir jpg
+    mv *.jpg jpg/   
+  fi
+done
+
+

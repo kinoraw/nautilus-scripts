@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for ((i=0; i<230;i++)); do
+	jpeg2hdrgen $1 $2 > $1.hdrgen
+	shift 2
+done
+
+
+
+
+

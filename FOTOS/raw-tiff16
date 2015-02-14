@@ -1,0 +1,18 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	ext=${file##*.}
+	if [ "$ext" == "RW2" ]; then
+        dcraw -a -H 0 -o 0 -q 3 -6 -T -w $file
+        exiftool -tagsFromFile $base1.RW2 $base1.jpg
+        rm $base1.jpg_original
+	fi
+  fi
+done
+
+

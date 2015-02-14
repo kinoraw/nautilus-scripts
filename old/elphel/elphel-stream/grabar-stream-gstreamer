@@ -1,0 +1,2 @@
+#!/bin/bash
+gst-launch -e rtspsrc location=rtsp://192.168.0.9:554 latency=100 ! rtpjpegdepay ! matroskamux ! filesink location=gstreamer_test.mkv

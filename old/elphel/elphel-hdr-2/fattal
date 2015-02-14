@@ -1,0 +1,15 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	exiftool -ApertureValue=2.8 -overwrite_original $file
+	pfsin $file | pfstmo_fattal02 -a 0.082 -b 0.8 -s 1 -n 0.1 | pfsgamma --gamma 1.0 | pfsout "$base"_fattal.jpg
+  fi
+done
+
+#pfsin 000001_100.dng | pfstmo_fattal02 -a 0.082 -b 0.8 -s 2 -n 1 | pfsgamma --gamma 2.6 | pfsout 000001_100_fattal.jpg
+
+

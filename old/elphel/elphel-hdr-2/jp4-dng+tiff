@@ -1,0 +1,13 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+ls *.jpg | parallel -j 8 elphel_dng 100 {} {}".dng"
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+  fi
+done
+
+

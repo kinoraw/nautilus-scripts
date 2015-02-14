@@ -1,0 +1,46 @@
+#!/bin/bash
+
+##########################################################################
+# Send To
+##########################################################################
+#                                                                        #
+# Created by Mattia Galati (Adaron)                                      #
+# first improvement and translation by Christopher Bratusek (Chrispy)    #
+# spanish translation by Nomentero - Igancuhz                            #
+##########################################################################
+# Language Settings ---------------------------------------------------- #
+destination='Seleccione destino:'
+title_destination='Enviar archivos a:'
+
+copy='Copiando...'
+title_copy='Por favor espere...'
+
+success='Los archivos se han copiado correctamente.'
+title_success='Correcto'
+
+errors='Ha ocurrido un error.'
+title_errors='Error'
+
+no_writable='El destino no existe o no se puede escribir en el.'
+title_no_writable='Error'
+# End of language settings ----------------------------------------------#
+##########################################################################
+
+devices=`ls -m /media/`
+vv=${devices//cdrom?, /}
+vd=${vv//cdrom, /}
+options=${vd//, / FALSE /media/}
+destinazione=`zenity --list --title "$title_destination" --text "$destination" --radiolist --column " " --column "Device" FALSE /media/$options`
+
+if [[ "$destinazione" = "" ]]; then
+    exit
+fi
+
+if [[ -w $destinazione ]]; then
+	cp -R $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS $destinazione | zenity --progress --pulsate --auto-close --title="$title_copy" --text="$copy"
+	if (( $? == 0 )); then
+		zenity --info --text="$success" --title "$title_success";
+	else	zenity --info --text="$errors" --title "$title_errors";
+	fi
+else	zenity --info --text="$no_writable" --title "$title_no_writable";
+fi

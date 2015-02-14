@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gst-launch-0.10 rtspsrc location=rtsp://192.168.1.9:554 latency=100 ! rtpjpegdepay ! jpegdec ! queue ! jp462bayer ! "video/x-raw-bayer, width=1920, height=1088, format=grbg" ! queue ! bayer2rgb2 method=1 ! ffmpegcolorspace ! queue ! xvimagesink
+

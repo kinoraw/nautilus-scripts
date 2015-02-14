@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#/////////crear camera response
+
+jpeg2hdrgen $1 $2 $3 $4 $5 > zsample.hdrgen
+
+pfsinhdrgen zsample.hdrgen | pfshdrcalibrate -v -s zcamera.response
+
+#////////crear hdrgen
+jpeg2hdrgen *.jpg > file.hdrgen
+
+#////////crear hdr
+pfsinhdrgen file.hdrgen | pfshdrcalibrate -v -f /home/carlos/zcamera.response | pfsoutexr file.exr
+
+#////////crear fattal
+pfsin $file | pfstmo_fattal02 | pfsgamma --gamma 2.6 | pfsout "$base"_fattal.png
+
+#////////crear mantiuk
+pfsin $file | pfstmo_mantiuk06 -f 0.3 -s 0.8 | pfsgamma --gamma 2 | pfsout "$base"_mantiuk2.png
+pfsin $file | pfstmo_mantiuk06 -f 0.1 -s 0.8 | pfsgamma --gamma 3.5 | pfsout "$base"_mantiuk06.png
+pfsin $file | pfstmo_mantiuk08 -e 1 -f 0.1 -s 0.8 | pfsgamma --gamma 3.5 | pfsout "$base"_mantiuk08.png
+

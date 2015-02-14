@@ -1,0 +1,6 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+montage $fpaths -tile 3x5 -geometry +0+0 montaje.jpg
+
+done

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+
+for ((i=0; i<1833;i++)); do                
+	align_image_stack -o $1 $2 $3
+	shift 3
+done

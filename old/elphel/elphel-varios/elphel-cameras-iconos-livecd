@@ -1,0 +1,3 @@
+#!/bin/bash
+
+elphel-cameras forall makedesktopentry makeroute

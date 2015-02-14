@@ -1,0 +1,9 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+	base=${file%.*}
+    exiftool -tagsFromFile $base1.RW2 $base1.jpg
+    rm $base1.jpg_original
+done

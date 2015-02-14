@@ -1,0 +1,19 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	ext=${file##*.}
+	basename=${base##*/}
+	movie2dng --dng --shift 0 --frames 1 $file s0
+	movie2dng --dng --shift 1 --frames 1 $file s1
+	movie2dng --dng --shift 2 --frames 1 $file s2
+	movie2dng --dng --shift 3 --frames 1 $file s3
+	qtpfsgui s0-000001.dng -e 0 -v -o s0.jpg -s s0.exr
+	qtpfsgui s1-000001.dng -e 0 -v -o s1.jpg -s s1.exr
+	qtpfsgui s2-000001.dng -e 0 -v -o s2.jpg -s s2.exr
+	qtpfsgui s3-000001.dng -e 0 -v -o s3.jpg -s s3.exr
+  fi
+done

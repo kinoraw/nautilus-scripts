@@ -1,0 +1,12 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+        base=${file%.*}
+	    convert $file -bordercolor snow -background black +polaroid $base-polo.png
+  fi
+done
+

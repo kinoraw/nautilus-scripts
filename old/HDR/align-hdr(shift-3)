@@ -1,0 +1,26 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+
+for ((i=0; i<3500;i++)); do                
+	align_image_stack -a stack $1 $2 $3
+	convert stack0000.tif $1-al.jpg
+	convert stack0001.tif $2-al.jpg
+	convert stack0002.tif $3-al.jpg
+
+	exiftool -tagsFromFile $1 $1-al.jpg
+	exiftool -tagsFromFile $2 $2-al.jpg
+	exiftool -tagsFromFile $3 $3-al.jpg
+
+	rm $1-al.jpg_original
+	rm $2-al.jpg_original
+	rm $3-al.jpg_original
+	rm stack0000.tif
+	rm stack0001.tif
+	rm stack0002.tif
+
+	shift 3
+done
+
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+        base=${file%.*}
+	    convert -resize 400% $file $base-a.jpg
+  fi
+done
+

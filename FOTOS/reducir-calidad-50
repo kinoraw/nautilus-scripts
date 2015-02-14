@@ -1,0 +1,12 @@
+#!/bin/bash
+
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+        base=${file%.*}
+	    convert -quality 50 $file $base-50q.jpg
+  fi
+done
+

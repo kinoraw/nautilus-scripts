@@ -1,0 +1,13 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	label=$(basename $base)	
+	convert $file -quality 100 -crop 300x300+955+440 -normalize $base-cn.jpg
+	convert $base-cn.jpg -quality 100 -background Orange -size 300x30 -pointsize 20 label:$label -gravity Center -append $base-l.jpg
+	rm $base-cn.jpg
+  fi
+done

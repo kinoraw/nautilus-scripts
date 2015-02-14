@@ -1,0 +1,4 @@
+#!/bin/bash
+java -jar -Xmx256m /home/kino/soft/Elphelvision/ElphelVision-dist.jar --debuglevel 3
+
+

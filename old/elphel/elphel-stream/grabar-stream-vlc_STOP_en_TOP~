@@ -1,0 +1,3 @@
+#!/bin/bash
+$hora = date '+%H_%M_%S' 
+vlc rtsp://192.168.0.9:554 -V x11 --sout file/ogg:rec_vlc_+"$hora".mov

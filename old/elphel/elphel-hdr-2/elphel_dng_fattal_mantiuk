@@ -1,0 +1,26 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	elphel_dng 100 $file $base"_100.dng"
+	exiftool -tagsFromFile $file $base"_100.dng"
+	exiftool -ISO=100 -FocalLength=4.5 -ApertureValue=2.0 -overwrite_original $file
+
+	#dcraw -T -4 -q 3 -a $file   #crea un tiff
+	#exiftool -tagsFromFile $file $base.jpg
+	
+	#pfsinhdrgen $base"_100.dng" | pfsoutexr "$base".exr #- | pfshdrcalibrate -v -f /home/carlos/zcamera.response  
+	
+	pfsin $base"_100.dng" | pfstmo_mantiuk06 -f 0.1 -s 0.8 | pfsgamma --gamma 3.5 | pfsout "$base"_mantiuk.jpg
+	pfsin $base"_100.dng" | pfstmo_fattal02 | pfsgamma --gamma 2.6 | pfsout "$base"_fattal.jpg
+	
+	rm $base"_100.dng"
+	mv $base"_100.dng_original" $base"_100.dng"
+
+  fi
+done
+
+

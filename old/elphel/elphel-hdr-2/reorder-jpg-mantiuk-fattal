@@ -1,0 +1,21 @@
+#!/bin/bash
+fpaths=`echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | sort`
+
+for file in $fpaths
+do
+  if [ -f "$file" ]; then
+	base=${file%.*}
+	if [ (echo $file | awk -F'_' '{print $NF}') -eq ('mantiuk.jpg') ]
+    then
+        mkdir mantiuk
+        mv $file mantiuk/$file
+    fi    
+    if [ (echo $file | awk -F'_' '{print $NF}') -eq ('fattal.jpg') ]
+    then    
+        mkdir fattal
+        mv $file fattal/$file
+    fi
+  fi
+done
+
+

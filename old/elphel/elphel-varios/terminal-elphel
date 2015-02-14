@@ -1,0 +1,2 @@
+#!/bin/bash
+gnome-terminal -e "ttylog -d /dev/ttyUSB0 -b 115200"
