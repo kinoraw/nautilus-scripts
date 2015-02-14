@@ -3,7 +3,7 @@ nautilus-scripts
 
 Nautilus scripts compilation from kinoraw project.
 
-To install and use this scripts you have to copy the files inside a folder and give them execution rights.
+To install and use this scripts you need to copy the files inside a folder and give them execution rights.
 
 on ubuntu 14.x, clone in folder:
 
