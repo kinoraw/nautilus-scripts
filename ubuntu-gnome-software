@@ -1,1 +1,11 @@
-sudo apt-get install keepassx gimp mypaint inkscape vlc-plugin-jack qjackctl zynaddsubfx filezilla aptitude amsynth git alacarte pyrenamer gpick gnome-tweak-tool
+sudo apt-get install 
+keepassx screenruler chromium-browser
+gimp mypaint inkscape 
+vlc vlc-plugin-jack 
+qjackctl zynaddsubfx amsynth pavucontrol
+filezilla aptitude git gdebi file-roller
+alacarte pyrenamer gpick gnome-tweak-tool
+
+sudo add-apt-repository ppa:thomas-schiex/blender
+sudo apt-get update
+sudo apt-get install blender
