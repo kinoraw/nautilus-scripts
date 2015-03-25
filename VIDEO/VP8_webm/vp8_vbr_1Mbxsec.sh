@@ -5,7 +5,8 @@ for param in $@
     echo $param
     if [ -f "$param" ]; then
 	  base=${param%.*}
-      mkdir $base
-	  ffmpeg -i $param -r 25 -qscale 1 $base/$base_%06d.png
-	fi	
+	  ffmpeg -i $param -c:v libvpx -b:v 1M -c:a libvorbis $base-1Mbxsec.webm
+  	fi	
 done
+
+
